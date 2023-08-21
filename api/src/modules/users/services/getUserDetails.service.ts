@@ -7,11 +7,14 @@ type Request = {
 
 export default class GetUserDetailsService {
   public async execute({ userName }: Request) {
-    const response = await api.get(`/users/${userName}`);
+    const [response, repos] = await Promise.all([
+      api.get(`/users/${userName}`),
+      api.get(`/users/${userName}/repos`),
+    ]);
 
-    if (!response)
+    if (!response.data || !repos.data)
       throw new CustomError('Request failed to retrieve user details', 400);
 
-    return response.data;
+    return { userData: response.data, repositories: repos.data };
   }
 }
