@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Flex, Image, VStack, Text, Box } from '@chakra-ui/react';
+import { Flex, Image, VStack, Text, Link } from '@chakra-ui/react';
+import pt, { parseISO, format } from 'date-fns';
 
 type UserCardTypes = {
   id: number;
@@ -9,6 +10,7 @@ type UserCardTypes = {
   avatar: string;
   profileUrl: string;
   createdAt: string;
+  repositories: any[];
 };
 
 export default function UserDetailsCard({
@@ -17,7 +19,14 @@ export default function UserDetailsCard({
   avatar,
   profileUrl,
   createdAt,
+  repositories,
 }: UserCardTypes) {
+  function formatTime(createdAt: string): string {
+    const date = parseISO(createdAt);
+    console.log(date);
+    return format(date, 'dd/MM/yyyy');
+  }
+
   return (
     <Flex
       mb="10px"
@@ -25,13 +34,19 @@ export default function UserDetailsCard({
       borderRadius="8px"
       border="1px solid rgba(112, 109, 109, 0.75)"
       padding="8px 8px"
+      alignItems="center"
     >
       <Image maxH="100px" src={avatar} borderRadius="50%" mr="20px" />
       <VStack alignItems="flex-start" justifyContent="center" gap="10px">
         <Text>userName: {login}</Text>
         <Text>id: {id}</Text>
-        <Text>Profile URL: {profileUrl}</Text>
-        <Text>Date of creation: {createdAt}</Text>
+        <Text>
+          Profile URL:
+          <Link ml="8px" href={profileUrl} isExternal>
+            {profileUrl}
+          </Link>
+        </Text>
+        <Text>Date of creation: {formatTime(createdAt)}</Text>
       </VStack>
     </Flex>
   );

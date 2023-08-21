@@ -5,6 +5,7 @@ import { api } from 'src/api';
 import { useQuery } from '@tanstack/react-query';
 import { Center, Flex, Spinner } from '@chakra-ui/react';
 import { BiSolidUserCircle } from 'react-icons/bi';
+import UserDetailsCard from 'src/components/UserDetailsCard';
 
 export default function Details() {
   const { username } = useParams();
@@ -69,7 +70,18 @@ export default function Details() {
         bg="#111111"
         color="#FFF"
         boxShadow="0px 0px 12px 8px rgba(46, 45, 45, 0.75)"
-      ></Flex>
+      >
+        {data && data.userData ? (
+          <UserDetailsCard
+            id={data.userData.id}
+            login={data.userData.login}
+            avatar={data.userData.avatar_url}
+            profileUrl={data.userData.html_url}
+            createdAt={data.userData.created_at}
+            repositories={data.repositories}
+          />
+        ) : null}
+      </Flex>
     </Flex>
   );
 }
