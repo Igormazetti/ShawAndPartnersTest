@@ -4,6 +4,7 @@ import { Box, Center, Flex, Spinner } from '@chakra-ui/react';
 import { VscGithub } from 'react-icons/vsc';
 import { useQuery } from '@tanstack/react-query';
 import { api } from 'src/api';
+import UserCard from 'src/components/UserCard';
 
 export default function page() {
   async function fetchData() {
@@ -44,11 +45,36 @@ export default function page() {
           maxW="800px"
           w="full"
           p="30px"
+          maxH="700px"
+          overflowY="auto"
+          sx={{
+            '&::-webkit-scrollbar': {
+              width: '4px',
+            },
+            '&::-webkit-scrollbar-track': {
+              width: '6px',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              background: 'rgba(112, 109, 109, 0.75)',
+              borderRadius: '24px',
+            },
+          }}
           borderRadius="8px"
           bg="#111111"
           color="#FFF"
           boxShadow="0px 0px 12px 8px rgba(46, 45, 45, 0.75)"
-        ></Flex>
+        >
+          {data.users
+            ? data.users.map((user: any) => (
+                <UserCard
+                  key={user.id}
+                  id={user.id}
+                  login={user.login}
+                  avatar={user.avatar_url}
+                />
+              ))
+            : null}
+        </Flex>
       )}
     </Flex>
   );
