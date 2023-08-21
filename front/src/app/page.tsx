@@ -52,7 +52,7 @@ export default function page() {
       ) : (
         <Flex
           direction="column"
-          maxW="800px"
+          maxW="700px"
           w="full"
           p="30px"
           maxH="700px"
