@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Box, Center, Flex, Spinner } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Spinner } from '@chakra-ui/react';
 import { VscGithub } from 'react-icons/vsc';
 import { useQuery } from '@tanstack/react-query';
 import { api } from 'src/api';
@@ -13,13 +13,23 @@ export default function page() {
     return request.data;
   }
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isPreviousData, refetch } = useQuery({
     queryKey: ['users'],
     queryFn: fetchData,
     retry: false,
   });
 
   console.log(data);
+
+  function handlePreviousButton() {
+    if (isPreviousData) {
+      refetch();
+    }
+  }
+
+  function handleNextButton() {
+    console.log(data);
+  }
 
   return (
     <Flex
@@ -64,7 +74,7 @@ export default function page() {
           color="#FFF"
           boxShadow="0px 0px 12px 8px rgba(46, 45, 45, 0.75)"
         >
-          {data.users
+          {data && data.users
             ? data.users.map((user: any) => (
                 <UserCard
                   key={user.id}
@@ -74,6 +84,35 @@ export default function page() {
                 />
               ))
             : null}
+
+          <Flex gap="30px" justifyContent="center" alignItems="center">
+            <Button
+              w="100px"
+              onClick={handlePreviousButton}
+              _hover={{
+                opacity: isPreviousData ? '0.8' : '1',
+                cursor: isPreviousData ? 'pointer' : 'default',
+              }}
+              disabled={!isPreviousData}
+              _focus={{
+                boxShadow: 'none',
+              }}
+              _active={{
+                bg: !isPreviousData && '#EDF2F7',
+                borderColor: !isPreviousData && '#EDF2F7',
+              }}
+            >
+              Reset
+            </Button>
+
+            <Button
+              w="100px"
+              onClick={handleNextButton}
+              _hover={{ opacity: '0.8' }}
+            >
+              Next
+            </Button>
+          </Flex>
         </Flex>
       )}
     </Flex>

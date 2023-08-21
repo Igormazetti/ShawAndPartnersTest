@@ -1,7 +1,8 @@
 'use client';
 
-import { Flex, Image, VStack, Text } from '@chakra-ui/react';
 import React from 'react';
+import { useRouter } from 'next/navigation';
+import { Flex, Image, VStack, Text } from '@chakra-ui/react';
 
 type UserCardTypes = {
   id: number;
@@ -10,6 +11,8 @@ type UserCardTypes = {
 };
 
 export default function UserCard({ id, login, avatar }: UserCardTypes) {
+  const router = useRouter();
+
   return (
     <Flex
       mb="10px"
@@ -22,6 +25,7 @@ export default function UserCard({ id, login, avatar }: UserCardTypes) {
       _hover={{
         opacity: '0.7',
       }}
+      onClick={() => router.push(`/details/${login}`)}
     >
       <Image maxH="80px" src={avatar} borderRadius="8px" />
       <VStack alignItems="flex-start" justifyContent="center">
