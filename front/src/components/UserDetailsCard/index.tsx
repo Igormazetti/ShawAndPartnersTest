@@ -48,7 +48,7 @@ export default function UserDetailsCard({
       >
         <Text>Username: {login}</Text>
         <Text>Id: {id}</Text>
-        <Text maxW={{ base: '140px' }}>
+        <Text maxW={{ base: '140px', sm: 'full' }}>
           Profile URL:{' '}
           <Link href={profileUrl} isExternal>
             {profileUrl}
