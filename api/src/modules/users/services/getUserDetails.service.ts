@@ -15,6 +15,15 @@ export default class GetUserDetailsService {
     if (!response.data || !repos.data)
       throw new CustomError('Request failed to retrieve user details', 400);
 
-    return { userData: response.data, repositories: repos.data };
+    return {
+      userData: {
+        id: response.data.id,
+        login: response.data.login,
+        avatar_url: response.data.avatar_url,
+        html_url: response.data.html_url,
+        created_at: response.data.data,
+      },
+      repositories: repos.data,
+    };
   }
 }
