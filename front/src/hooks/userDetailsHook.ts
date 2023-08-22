@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { api } from 'src/api';
 
-type UserData = {
+export type UserData = {
   id: number;
   login: string;
   avatar_url: string;
@@ -9,8 +9,14 @@ type UserData = {
   created_at: string;
 };
 
+export type UserRepositoriesData = {
+  id: number;
+  name: string;
+  url: string;
+};
+
 type UserDetails = {
-  repositories: any[];
+  repositories: UserRepositoriesData[];
   userData: UserData;
 };
 

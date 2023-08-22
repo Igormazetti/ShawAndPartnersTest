@@ -10,9 +10,10 @@ import {
   TableContainer,
   Link,
 } from '@chakra-ui/react';
+import { UserRepositoriesData } from 'src/hooks/userDetailsHook';
 
 type TableComponentPropTypes = {
-  tableContent: any[];
+  tableContent: UserRepositoriesData[];
 };
 
 export default function DetailsTable({

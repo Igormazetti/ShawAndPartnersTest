@@ -11,8 +11,6 @@ export default function Details() {
   const { username } = useParams();
   const { details, loading } = useUsersDetailsHook(username as string);
 
-  console.log(details);
-
   if (loading) {
     return (
       <Center h="100vh">

@@ -1,16 +1,12 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Center, Flex, Spinner } from '@chakra-ui/react';
 import { VscGithub } from 'react-icons/vsc';
 import UserCard from 'src/components/UserCard';
 import useUsersListHook from 'src/hooks/usersListHook';
 
 export default function page() {
-  const [nextPageNumber, setNextPageNumber] = useState(1);
-  const [prevPageNumber, setPrevPageNumber] = useState(1);
   const { users, isLoading, handleNextPage, fetchData } = useUsersListHook();
-
-  console.log(users);
 
   return (
     <Flex

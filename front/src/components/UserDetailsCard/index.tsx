@@ -3,6 +3,7 @@
 import React from 'react';
 import { Flex, Image, VStack, Text, Link } from '@chakra-ui/react';
 import { parseISO, format } from 'date-fns';
+import { UserRepositoriesData } from 'src/hooks/userDetailsHook';
 
 type UserCardTypes = {
   id: number;
@@ -10,7 +11,7 @@ type UserCardTypes = {
   avatar: string;
   profileUrl: string;
   createdAt: string;
-  repositories: any[];
+  repositories: UserRepositoriesData[];
 };
 
 export default function UserDetailsCard({
@@ -46,15 +47,17 @@ export default function UserDetailsCard({
         justifyContent="center"
         gap="10px"
       >
-        <Text>Username: {login}</Text>
-        <Text>Id: {id}</Text>
-        <Text maxW={{ base: '140px', sm: 'full' }}>
+        <Text data-testid="user-name">Username: {login}</Text>
+        <Text data-testid="user-id">Id: {id}</Text>
+        <Text data-testid="profile-url" maxW={{ base: '140px', sm: 'full' }}>
           Profile URL:{' '}
           <Link href={profileUrl} isExternal>
             {profileUrl}
           </Link>
         </Text>
-        <Text>Date of creation: {formatTime(createdAt)}</Text>
+        <Text data-testid="creation-date">
+          Date of creation: {formatTime(createdAt)}
+        </Text>
       </VStack>
     </Flex>
   );
