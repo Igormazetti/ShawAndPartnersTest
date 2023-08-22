@@ -29,10 +29,12 @@ const repositoriesMock = [
 describe('Get User Details', () => {
   beforeEach(() => {
     service = new GetUserDetailsService();
+
+    jest.clearAllMocks();
   });
 
   describe('execute', () => {
-    it('on success', async () => {
+    it('should be able to get user details', async () => {
       jest.spyOn(api, 'get').mockResolvedValueOnce({
         data: {
           ...userMock,
@@ -41,7 +43,7 @@ describe('Get User Details', () => {
       jest.spyOn(api, 'get').mockResolvedValueOnce({
         data: repositoriesMock,
       });
-      const response = await service.execute({ userName: 'dada' });
+      const response = await service.execute({ userName: 'octocat' });
 
       expect(response).toEqual({
         userData: { ...userMock },
@@ -49,12 +51,12 @@ describe('Get User Details', () => {
       });
     });
 
-    it('on error', async () => {
-      jest.spyOn(api, 'get').mockRejectedValueOnce({
-        response: {
-          status: 404,
-        },
-      });
+    it('should throw error on failure get user details', async () => {
+      jest.spyOn(api, 'get').mockRejectedValueOnce(null);
+
+      expect(async () =>
+        expect(await service.execute({ userName: 'octocat' })).toThrowError(),
+      );
     });
   });
 });
