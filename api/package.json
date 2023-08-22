@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "tsx watch ./src/server.ts",
     "build": "yarn && tsup src --out-dir build",
     "start": "node build/server.js"
@@ -18,6 +18,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "jest": "^29.6.3",
     "nodemon": "^3.0.1",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^10.9.1"
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.3",
     "@types/node": "^18.7.6",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -34,6 +36,7 @@
     "eslint-plugin-mocha": "^9.0.0",
     "eslint-plugin-sonarjs": "^0.10.0",
     "prettier": "^3.0.2",
+    "ts-jest": "^29.1.1",
     "tsup": "^7.2.0",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6"

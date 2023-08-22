@@ -1,5 +1,5 @@
-import { CustomError } from 'common/error/CustomError';
-import { api } from 'lib/api';
+import { CustomError } from '../../../common/error/CustomError';
+import { api } from '../../../lib/api';
 
 type Request = {
   userName: string;
