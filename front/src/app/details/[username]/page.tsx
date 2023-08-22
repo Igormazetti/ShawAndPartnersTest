@@ -7,11 +7,10 @@ import UserDetailsCard from 'src/components/UserDetailsCard';
 import useUsersDetailsHook from 'src/hooks/userDetailsHook';
 
 export default function Details() {
-  const { details, getUserDetails, loading } = useUsersDetailsHook();
   const { username } = useParams();
+  const { details, loading } = useUsersDetailsHook(username as string);
 
-  const data = getUserDetails(username as string);
-  console.log(data);
+  console.log(details);
 
   if (loading) {
     return (

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { api } from 'src/api';
 
 type UserData = {
@@ -14,11 +14,11 @@ type UserDetails = {
   userData: UserData;
 };
 
-export default function useUsersDetailsHook() {
+export default function useUsersDetailsHook(username: string) {
   const [details, setDetails] = useState<UserDetails>();
   const [loading, setLoading] = useState(false);
 
-  async function getUserDetails(username: string) {
+  async function getUserDetails() {
     try {
       setLoading(true);
       const request = await api.get(`/details/${username}`);
@@ -32,5 +32,9 @@ export default function useUsersDetailsHook() {
     }
   }
 
-  return { details, loading, getUserDetails };
+  useEffect(() => {
+    getUserDetails();
+  }, []);
+
+  return { details, loading };
 }

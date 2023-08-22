@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Flex, Image, VStack, Text, Link } from '@chakra-ui/react';
-import pt, { parseISO, format } from 'date-fns';
+import { parseISO, format } from 'date-fns';
 
 type UserCardTypes = {
   id: number;
@@ -19,7 +19,6 @@ export default function UserDetailsCard({
   avatar,
   profileUrl,
   createdAt,
-  repositories,
 }: UserCardTypes) {
   function formatTime(createdAt: string): string {
     const date = parseISO(createdAt);
