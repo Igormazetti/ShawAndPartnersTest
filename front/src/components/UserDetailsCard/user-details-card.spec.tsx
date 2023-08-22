@@ -1,7 +1,7 @@
 import { screen, render } from '@testing-library/react';
 import UserDetailsCard from './';
 
-describe('User Details Card', () => {
+describe('User Details Card Component', () => {
   const userDetailsData = {
     id: 1,
     login: 'octocat',

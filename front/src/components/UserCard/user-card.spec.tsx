@@ -2,7 +2,7 @@ import { screen, render, fireEvent } from '@testing-library/react';
 import UserCard from './';
 import { AppRouterContextProviderMock } from './useRouterMock';
 
-describe('User Card', () => {
+describe('User Card Component', () => {
   const push = jest.fn();
 
   const userData = {
@@ -28,7 +28,7 @@ describe('User Card', () => {
     expect(avatarImage).toHaveAttribute('src', userData.avatar_url);
   });
 
-  it('should redirect to details page agter clicking the card', () => {
+  it('should redirect to details page after clicking the card', () => {
     render(
       <AppRouterContextProviderMock router={{ push }}>
         <UserCard
