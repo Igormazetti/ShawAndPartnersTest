@@ -40,9 +40,9 @@ export default function DetailsTable({
       <Table variant="simple">
         <Thead>
           <Tr>
-            <Th>ID</Th>
-            <Th>Name</Th>
-            <Th>URL</Th>
+            <Th color="rgba(13, 184, 28, 0.75)">ID</Th>
+            <Th color="rgba(13, 184, 28, 0.75)">Name</Th>
+            <Th color="rgba(13, 184, 28, 0.75)">URL</Th>
           </Tr>
         </Thead>
 

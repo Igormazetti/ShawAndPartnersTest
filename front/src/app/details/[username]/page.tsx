@@ -36,7 +36,7 @@ export default function Details() {
 
       <Flex
         direction="column"
-        maxW="900px"
+        maxW="1000px"
         w="full"
         p="30px"
         maxH="700px"
