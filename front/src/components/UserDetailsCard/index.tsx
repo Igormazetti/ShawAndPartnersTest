@@ -34,13 +34,23 @@ export default function UserDetailsCard({
       padding="8px 8px"
       alignItems="center"
     >
-      <Image maxH="100px" src={avatar} borderRadius="50%" mr="20px" />
-      <VStack alignItems="flex-start" justifyContent="center" gap="10px">
+      <Image
+        maxH={{ base: '80px', md: '100px' }}
+        src={avatar}
+        borderRadius="50%"
+        mr={{ base: '0px', md: '10px' }}
+      />
+      <VStack
+        flexWrap="wrap"
+        alignItems="flex-start"
+        justifyContent="center"
+        gap="10px"
+      >
         <Text>Username: {login}</Text>
         <Text>Id: {id}</Text>
-        <Text>
-          Profile URL:
-          <Link ml="8px" href={profileUrl} isExternal>
+        <Text maxW={{ base: '140px' }}>
+          Profile URL:{' '}
+          <Link href={profileUrl} isExternal>
             {profileUrl}
           </Link>
         </Text>

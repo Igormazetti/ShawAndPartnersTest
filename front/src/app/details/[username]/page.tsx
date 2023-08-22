@@ -5,6 +5,7 @@ import { Center, Flex, Spinner } from '@chakra-ui/react';
 import { BiSolidUserCircle } from 'react-icons/bi';
 import UserDetailsCard from 'src/components/UserDetailsCard';
 import useUsersDetailsHook from 'src/hooks/userDetailsHook';
+import DetailsTable from 'src/components/DetailsTable';
 
 export default function Details() {
   const { username } = useParams();
@@ -37,23 +38,10 @@ export default function Details() {
 
       <Flex
         direction="column"
-        maxW="700px"
+        maxW="900px"
         w="full"
         p="30px"
         maxH="700px"
-        overflowY="auto"
-        sx={{
-          '&::-webkit-scrollbar': {
-            width: '4px',
-          },
-          '&::-webkit-scrollbar-track': {
-            width: '6px',
-          },
-          '&::-webkit-scrollbar-thumb': {
-            background: 'rgba(112, 109, 109, 0.75)',
-            borderRadius: '24px',
-          },
-        }}
         borderRadius="8px"
         bg="#111111"
         color="#FFF"
@@ -68,6 +56,10 @@ export default function Details() {
             createdAt={details.userData.created_at}
             repositories={details.repositories}
           />
+        ) : null}
+
+        {details && details.repositories ? (
+          <DetailsTable tableContent={details.repositories} />
         ) : null}
       </Flex>
     </Flex>

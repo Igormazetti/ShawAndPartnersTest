@@ -10,35 +10,57 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Link,
 } from '@chakra-ui/react';
 
 type TableComponentPropTypes = {
-  tableContent: number;
+  tableContent: any[];
 };
 
 export default function DetailsTable({
-  tableContent = 1,
+  tableContent,
 }: TableComponentPropTypes) {
   return (
-    <TableContainer>
+    <TableContainer
+      overflowX="auto"
+      overflowY="auto"
+      sx={{
+        '&::-webkit-scrollbar': {
+          height: '6px',
+          width: '4px',
+        },
+        '&::-webkit-scrollbar-track': {
+          width: '6px',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: 'rgba(112, 109, 109, 0.75)',
+          borderRadius: '24px',
+        },
+      }}
+    >
       <Table variant="simple">
-        <TableCaption>Imperial to metric conversion factors</TableCaption>
         <Thead>
           <Tr>
-            <Th isNumeric>ID</Th>
+            <Th>ID</Th>
             <Th>Name</Th>
             <Th>URL</Th>
           </Tr>
         </Thead>
 
         <Tbody>
-          {tableContent ? (
-            <Tr>
-              <Td>inches</Td>
-              <Td>millimetres (mm)</Td>
-              <Td isNumeric>25.4</Td>
-            </Tr>
-          ) : null}
+          {tableContent
+            ? tableContent.map((item) => (
+                <Tr key={item.id}>
+                  <Td isNumeric>{item.id}</Td>
+                  <Td>{item.name}</Td>
+                  <Td>
+                    <Link ml="8px" href={item.url} isExternal>
+                      {item.url}
+                    </Link>
+                  </Td>
+                </Tr>
+              ))
+            : null}
         </Tbody>
       </Table>
     </TableContainer>
