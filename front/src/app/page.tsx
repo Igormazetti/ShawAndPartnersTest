@@ -1,35 +1,16 @@
 'use client';
-import React from 'react';
-import { Box, Button, Center, Flex, Spinner } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Button, Center, Flex, Spinner } from '@chakra-ui/react';
 import { VscGithub } from 'react-icons/vsc';
-import { useQuery } from '@tanstack/react-query';
-import { api } from 'src/api';
 import UserCard from 'src/components/UserCard';
+import useUsersListHook from 'src/hooks/usersListHook';
 
 export default function page() {
-  async function fetchData() {
-    const request = await api.get('');
+  const [nextPageNumber, setNextPageNumber] = useState(1);
+  const [prevPageNumber, setPrevPageNumber] = useState(1);
+  const { users, isLoading, handleNextPage, fetchData } = useUsersListHook();
 
-    return request.data;
-  }
-
-  const { data, isLoading, isPreviousData, refetch } = useQuery({
-    queryKey: ['users'],
-    queryFn: fetchData,
-    retry: false,
-  });
-
-  console.log(data);
-
-  function handlePreviousButton() {
-    if (isPreviousData) {
-      refetch();
-    }
-  }
-
-  function handleNextButton() {
-    console.log(data);
-  }
+  console.log(users);
 
   return (
     <Flex
@@ -74,8 +55,8 @@ export default function page() {
           color="#FFF"
           boxShadow="0px 0px 12px 8px rgba(46, 45, 45, 0.75)"
         >
-          {data && data.users
-            ? data.users.map((user: any) => (
+          {!!users?.users
+            ? users.users.map((user) => (
                 <UserCard
                   key={user.id}
                   id={user.id}
@@ -88,26 +69,22 @@ export default function page() {
           <Flex gap="30px" justifyContent="center" alignItems="center">
             <Button
               w="100px"
-              onClick={handlePreviousButton}
+              onClick={fetchData}
               _hover={{
-                opacity: isPreviousData ? '0.8' : '1',
-                cursor: isPreviousData ? 'pointer' : 'default',
+                opacity: '0.8',
+                cursor: 'pointer',
               }}
-              disabled={!isPreviousData}
+              disabled={users?.prevPageNumber === 1}
               _focus={{
                 boxShadow: 'none',
               }}
-              _active={{
-                bg: !isPreviousData && '#EDF2F7',
-                borderColor: !isPreviousData && '#EDF2F7',
-              }}
             >
-              Reset
+              First page
             </Button>
 
             <Button
               w="100px"
-              onClick={handleNextButton}
+              onClick={handleNextPage}
               _hover={{ opacity: '0.8' }}
             >
               Next

@@ -38,8 +38,8 @@ export default function UserDetailsCard({
     >
       <Image maxH="100px" src={avatar} borderRadius="50%" mr="20px" />
       <VStack alignItems="flex-start" justifyContent="center" gap="10px">
-        <Text>userName: {login}</Text>
-        <Text>id: {id}</Text>
+        <Text>Username: {login}</Text>
+        <Text>Id: {id}</Text>
         <Text>
           Profile URL:
           <Link ml="8px" href={profileUrl} isExternal>
