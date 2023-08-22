@@ -21,7 +21,7 @@ export default class GetUserDetailsService {
         login: response.data.login,
         avatar_url: response.data.avatar_url,
         html_url: response.data.html_url,
-        created_at: response.data.data,
+        created_at: response.data.created_at,
       },
       repositories: repos.data,
     };
