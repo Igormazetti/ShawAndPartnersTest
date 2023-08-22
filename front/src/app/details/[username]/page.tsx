@@ -1,30 +1,19 @@
 'use client';
 import React from 'react';
 import { useParams } from 'next/navigation';
-import { api } from 'src/api';
-import { useQuery } from '@tanstack/react-query';
 import { Center, Flex, Spinner } from '@chakra-ui/react';
 import { BiSolidUserCircle } from 'react-icons/bi';
 import UserDetailsCard from 'src/components/UserDetailsCard';
+import useUsersDetailsHook from 'src/hooks/userDetailsHook';
 
 export default function Details() {
+  const { details, getUserDetails, loading } = useUsersDetailsHook();
   const { username } = useParams();
 
-  async function fetchData() {
-    const request = await api.get(`/details/${username}`);
-
-    return request.data;
-  }
-
-  const { data, isLoading } = useQuery({
-    queryKey: ['users'],
-    queryFn: fetchData,
-    retry: false,
-  });
-
+  const data = getUserDetails(username as string);
   console.log(data);
 
-  if (isLoading) {
+  if (loading) {
     return (
       <Center h="100vh">
         <Spinner color="#FFF" size="xl" />
@@ -71,14 +60,14 @@ export default function Details() {
         color="#FFF"
         boxShadow="0px 0px 12px 8px rgba(46, 45, 45, 0.75)"
       >
-        {data && data.userData ? (
+        {details && details.userData ? (
           <UserDetailsCard
-            id={data.userData.id}
-            login={data.userData.login}
-            avatar={data.userData.avatar_url}
-            profileUrl={data.userData.html_url}
-            createdAt={data.userData.created_at}
-            repositories={data.repositories}
+            id={details.userData.id}
+            login={details.userData.login}
+            avatar={details.userData.avatar_url}
+            profileUrl={details.userData.html_url}
+            createdAt={details.userData.created_at}
+            repositories={details.repositories}
           />
         ) : null}
       </Flex>

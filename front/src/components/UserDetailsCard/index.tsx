@@ -23,7 +23,6 @@ export default function UserDetailsCard({
 }: UserCardTypes) {
   function formatTime(createdAt: string): string {
     const date = parseISO(createdAt);
-    console.log(date);
     return format(date, 'dd/MM/yyyy');
   }
 
