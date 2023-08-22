@@ -15,6 +15,7 @@ export default function UserCard({ id, login, avatar }: UserCardTypes) {
 
   return (
     <Flex
+      data-testid="user-card-container"
       mb="10px"
       gap="16px"
       borderRadius="8px"
@@ -27,7 +28,12 @@ export default function UserCard({ id, login, avatar }: UserCardTypes) {
       }}
       onClick={() => router.push(`/details/${login}`)}
     >
-      <Image maxH="80px" src={avatar} borderRadius="8px" />
+      <Image
+        data-testid="user-card-avatar"
+        maxH="80px"
+        src={avatar}
+        borderRadius="8px"
+      />
       <VStack alignItems="flex-start" justifyContent="center">
         <Text>{id}</Text>
         <Text>{login}</Text>
