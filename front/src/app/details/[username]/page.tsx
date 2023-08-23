@@ -13,9 +13,19 @@ export default function Details() {
 
   if (loading) {
     return (
-      <Center h="100vh">
-        <Spinner color="#FFF" size="xl" />
-      </Center>
+      <Flex
+        minH="100vh"
+        bg="#141414"
+        color="#FFF"
+        direction="column"
+        alignItems="center"
+        gap="50px"
+        p="50px 20px"
+      >
+        <Center h="100vh">
+          <Spinner color="#FFF" size="xl" />
+        </Center>
+      </Flex>
     );
   }
 
